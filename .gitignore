@@ -1,0 +1,21 @@
+# Godot
+.godot/
+*.import
+*.godot.uid
+
+# Build output
+build/
+export/
+
+# Editor
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

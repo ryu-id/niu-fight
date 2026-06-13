@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3 uid="uid://char_select"]
+
+[ext_resource type="Script" path="res://scripts/character_select.gd" id="1"]
+
+[node name="CharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.06, 0.06, 0.1, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 80.0
+offset_right = 350.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "PILIH PEJUANG NUSANTARA"
+horizontal_alignment = 1
+
+[node name="CharacterGrid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -200.0
+offset_right = 600.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 30
+
+[node name="GajahMada" type="Button" parent="CharacterGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 320)
+theme_override_font_sizes/font_size = 24
+text = "GAJAH MADA
+Majapahit
+Grappler"
+
+[node name="NagaSamudra" type="Button" parent="CharacterGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 320)
+theme_override_font_sizes/font_size = 24
+text = "NAGA SAMUDRA
+Srivijaya
+Zoner"
+
+[node name="GarudaSinghasari" type="Button" parent="CharacterGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 320)
+theme_override_font_sizes/font_size = 24
+text = "GARUDA SINGHASARI
+Singhasari
+Aerial"
+
+[node name="KerisEmas" type="Button" parent="CharacterGrid"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 320)
+theme_override_font_sizes/font_size = 24
+text = "KERIS EMAS
+Mataram
+Precision"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -120.0
+offset_right = 150.0
+offset_bottom = -60.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 28
+text = "KEMBALI"
+
+[connection signal="pressed" from="CharacterGrid/GajahMada" to="." method="_on_character_selected" binds= ["gajahmada"]]
+[connection signal="pressed" from="CharacterGrid/NagaSamudra" to="." method="_on_character_selected" binds= ["nagasamudra"]]
+[connection signal="pressed" from="CharacterGrid/GarudaSinghasari" to="." method="_on_character_selected" binds= ["garudasinghasari"]]
+[connection signal="pressed" from="CharacterGrid/KerisEmas" to="." method="_on_character_selected" binds= ["kerisemas"]]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]

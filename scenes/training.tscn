@@ -1,0 +1,128 @@
+[gd_scene load_steps=1 format=3 uid="uid://training"]
+
+[ext_resource type="Script" path="res://scripts/training.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(80, 80)
+
+[node name="Training" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.08, 0.08, 0.1, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 30.0
+offset_right = 1320.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 42
+text = "TRAINING MODE"
+horizontal_alignment = 1
+
+[node name="FloorGuide" type="ColorRect" parent="."]
+offset_left = 0.0
+offset_top = 860.0
+offset_right = 1920.0
+offset_bottom = 868.0
+color = Color(0.5, 0.0, 0.0, 0.3)
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(400, 700)
+
+[node name="Dummy" type="Node2D" parent="."]
+position = Vector2(1400, 700)
+
+[node name="Instructions" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 920.0
+offset_right = 1800.0
+offset_bottom = 1000.0
+theme_override_font_sizes/font_size = 22
+text = "WASD: Gerak + Lompat • J/K: Pukul • U/I: Tendang • O: Special • P: Super • ESC: Kembali"
+horizontal_alignment = 1
+
+[node name="ControlsHint" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 1000.0
+offset_right = 1800.0
+offset_bottom = 1050.0
+theme_override_font_sizes/font_size = 18
+text = "Dummy tidak menyerang — gunakan untuk berlatih combo"
+horizontal_alignment = 1
+modulate = Color(0.5, 0.5, 0.6, 1)
+
+[node name="VirtualControls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="JoystickLeft" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(100, 830)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_left"
+passby_press = true
+shape_centered = true
+scale = Vector2(2.0, 2.0)
+
+[node name="JoystickRight" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(240, 830)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_right"
+passby_press = true
+shape_centered = true
+scale = Vector2(2.0, 2.0)
+
+[node name="JumpBtn" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(170, 700)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_up"
+passby_press = false
+shape_centered = true
+scale = Vector2(1.5, 1.5)
+
+[node name="AttackButtons" type="HBoxContainer" parent="VirtualControls"]
+offset_left = 1250.0
+offset_top = 780.0
+offset_right = 1900.0
+offset_bottom = 1050.0
+theme_override_constants/separation = 15
+
+[node name="LP" type="TouchScreenButton" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_lp"
+
+[node name="HP" type="TouchScreenButton" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_hp"
+
+[node name="LK" type="TouchScreenButton" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_lk"
+
+[node name="HK" type="TouchScreenButton" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(100, 100)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_hk"
+
+[node name="Special" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(1620, 700)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_special"
+scale = Vector2(1.5, 1.2)
+
+[node name="Super" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(1750, 700)
+shape = SubResource("RectangleShape2D_1")
+action = "p1_super"
+scale = Vector2(1.5, 1.2)
