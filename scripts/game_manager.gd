@@ -1,5 +1,4 @@
 extends Node
-class_name GameManager
 
 enum GameState { MAIN_MENU, CHARACTER_SELECT, FIGHTING, STORY, TRAINING, GAME_OVER }
 

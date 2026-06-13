@@ -1,17 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://fight_arena"]
+[gd_scene load_steps=6 format=3 uid="uid://fight_arena"]
 
 [ext_resource type="Script" path="res://scripts/fight_arena.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/characters/gajahmada/idle.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/characters/nagasamudra/idle.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/stages/borobudur.png" id="4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(80, 80)
+size = Vector2(80, 160)
 
 [node name="FightArena" type="Node2D"]
 script = ExtResource("1")
-groups = ["arena"]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 scale = Vector2(1.0, 1.0)
+texture = ExtResource("4")
 centered = true
 
 [node name="StageLabel" type="Label" parent="."]
@@ -23,20 +26,32 @@ theme_override_font_sizes/font_size = 32
 text = "STAGE: CANDI BOROBUDUR"
 horizontal_alignment = 1
 
-[node name="Player1Container" type="Node2D" parent="."]
+[node name="Player1" type="CharacterBody2D" parent="." groups=["player1"]]
 position = Vector2(500, 700)
+script = ExtResource("1_player")
+player_id = 1
 
-[node name="Player2Container" type="Node2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Player1"]
+texture = ExtResource("2")
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Player2" type="CharacterBody2D" parent="." groups=["player2"]]
 position = Vector2(1420, 700)
+script = ExtResource("1_player")
+player_id = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+texture = ExtResource("3")
+scale = Vector2(1.5, 1.5)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource("RectangleShape2D_1")
 
 [node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Player1HealthBg" type="ColorRect" parent="UI"]
-offset_left = 46.0
-offset_top = 26.0
-offset_right = 554.0
-offset_bottom = 74.0
-color = Color(0.05, 0.0, 0.0, 0.7)
 
 [node name="Player1Health" type="ProgressBar" parent="UI"]
 offset_left = 50.0
@@ -46,14 +61,6 @@ offset_bottom = 70.0
 max_value = 100.0
 value = 100.0
 show_percentage = false
-modulate = Color(0.2, 1.0, 0.3, 1.0)
-
-[node name="Player2HealthBg" type="ColorRect" parent="UI"]
-offset_left = 1366.0
-offset_top = 26.0
-offset_right = 1874.0
-offset_bottom = 74.0
-color = Color(0.05, 0.0, 0.0, 0.7)
 
 [node name="Player2Health" type="ProgressBar" parent="UI"]
 offset_left = 1370.0
@@ -63,25 +70,22 @@ offset_bottom = 70.0
 max_value = 100.0
 value = 100.0
 show_percentage = false
-fill_mode = 0
-modulate = Color(1.0, 0.3, 0.3, 1.0)
 
 [node name="RoundLabel" type="Label" parent="UI"]
-offset_left = 800.0
-offset_top = 20.0
-offset_right = 1120.0
-offset_bottom = 80.0
-theme_override_font_sizes/font_size = 36
+offset_left = 850.0
+offset_top = 30.0
+offset_right = 1070.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 28
 text = "ROUND 1"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="TimerLabel" type="Label" parent="UI"]
 offset_left = 850.0
 offset_top = 80.0
 offset_right = 1070.0
-offset_bottom = 130.0
-theme_override_font_sizes/font_size = 28
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 24
 text = "99"
 horizontal_alignment = 1
 
@@ -92,16 +96,6 @@ offset_right = 350.0
 offset_bottom = 110.0
 max_value = 100.0
 value = 0.0
-modulate = Color(1.0, 0.8, 0.2, 1.0)
-
-[node name="SuperLabelP1" type="Label" parent="UI"]
-offset_left = 50.0
-offset_top = 68.0
-offset_right = 350.0
-offset_bottom = 90.0
-theme_override_font_sizes/font_size = 12
-text = "SUPER"
-horizontal_alignment = 1
 
 [node name="SuperMeterP2" type="ProgressBar" parent="UI"]
 offset_left = 1570.0
@@ -110,36 +104,6 @@ offset_right = 1870.0
 offset_bottom = 110.0
 max_value = 100.0
 value = 0.0
-fill_mode = 0
-modulate = Color(1.0, 0.8, 0.2, 1.0)
-
-[node name="SuperLabelP2" type="Label" parent="UI"]
-offset_left = 1570.0
-offset_top = 68.0
-offset_right = 1870.0
-offset_bottom = 90.0
-theme_override_font_sizes/font_size = 12
-text = "SUPER"
-horizontal_alignment = 1
-
-[node name="Player1Name" type="Label" parent="UI"]
-offset_left = 50.0
-offset_top = 5.0
-offset_right = 350.0
-offset_bottom = 28.0
-theme_override_font_sizes/font_size = 14
-text = "GAJAH MADA"
-modulate = Color(0.2, 1.0, 0.3, 1.0)
-
-[node name="Player2Name" type="Label" parent="UI"]
-offset_left = 1570.0
-offset_top = 5.0
-offset_right = 1870.0
-offset_bottom = 28.0
-theme_override_font_sizes/font_size = 14
-text = "NAGA SAMUDRA"
-horizontal_alignment = 2
-modulate = Color(1.0, 0.3, 0.3, 1.0)
 
 [node name="VirtualControls" type="Control" parent="UI"]
 layout_mode = 3
@@ -147,69 +111,64 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="JoystickLeft" type="TouchScreenButton" parent="UI/VirtualControls"]
-position = Vector2(100, 830)
+[node name="Joystick" type="TouchScreenButton" parent="VirtualControls"]
+position = Vector2(150, 850)
 shape = SubResource("RectangleShape2D_1")
-action = "p1_left"
-passby_press = true
-shape_centered = true
-scale = Vector2(2.0, 2.0)
 
-[node name="JoystickRight" type="TouchScreenButton" parent="UI/VirtualControls"]
-position = Vector2(240, 830)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_right"
-passby_press = true
-shape_centered = true
-scale = Vector2(2.0, 2.0)
-
-[node name="JumpBtn" type="TouchScreenButton" parent="UI/VirtualControls"]
-position = Vector2(170, 700)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_up"
-passby_press = false
-shape_centered = true
-scale = Vector2(1.5, 1.5)
-
-[node name="AttackButtons" type="HBoxContainer" parent="UI/VirtualControls"]
-offset_left = 1250.0
+[node name="AttackButtons" type="HBoxContainer" parent="VirtualControls"]
+offset_left = 1300.0
 offset_top = 780.0
-offset_right = 1900.0
+offset_right = 1850.0
 offset_bottom = 1050.0
+theme_override_constants/separation = 20
+
+[node name="LP" type="Button" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 120)
+theme_override_font_sizes/font_size = 24
+text = "LP"
+
+[node name="HP" type="Button" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 120)
+theme_override_font_sizes/font_size = 24
+text = "HP"
+
+[node name="LK" type="Button" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 120)
+theme_override_font_sizes/font_size = 24
+text = "LK"
+
+[node name="HK" type="Button" parent="VirtualControls/AttackButtons"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 120)
+theme_override_font_sizes/font_size = 24
+text = "HK"
+
+[node name="SpecialButtons" type="VBoxContainer" parent="VirtualControls"]
+offset_left = 1650.0
+offset_top = 650.0
+offset_right = 1850.0
+offset_bottom = 780.0
 theme_override_constants/separation = 15
 
-[node name="LP" type="TouchScreenButton" parent="UI/VirtualControls/AttackButtons"]
+[node name="Special" type="Button" parent="VirtualControls/SpecialButtons"]
 layout_mode = 2
-custom_minimum_size = Vector2(100, 100)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_lp"
+custom_minimum_size = Vector2(180, 60)
+theme_override_font_sizes/font_size = 22
+text = "SPECIAL"
 
-[node name="HP" type="TouchScreenButton" parent="UI/VirtualControls/AttackButtons"]
+[node name="Super" type="Button" parent="VirtualControls/SpecialButtons"]
 layout_mode = 2
-custom_minimum_size = Vector2(100, 100)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_hp"
+custom_minimum_size = Vector2(180, 60)
+theme_override_font_sizes/font_size = 22
+text = "SUPER"
 
-[node name="LK" type="TouchScreenButton" parent="UI/VirtualControls/AttackButtons"]
-layout_mode = 2
-custom_minimum_size = Vector2(100, 100)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_lk"
-
-[node name="HK" type="TouchScreenButton" parent="UI/VirtualControls/AttackButtons"]
-layout_mode = 2
-custom_minimum_size = Vector2(100, 100)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_hk"
-
-[node name="Special" type="TouchScreenButton" parent="UI/VirtualControls"]
-position = Vector2(1620, 700)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_special"
-scale = Vector2(1.5, 1.2)
-
-[node name="Super" type="TouchScreenButton" parent="UI/VirtualControls"]
-position = Vector2(1750, 700)
-shape = SubResource("RectangleShape2D_1")
-action = "p1_super"
-scale = Vector2(1.5, 1.2)
+[node name="PauseButton" type="Button" parent="UI"]
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 200.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 24
+text = "PAUSE"
